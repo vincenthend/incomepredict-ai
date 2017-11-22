@@ -3,5 +3,12 @@ from flask import render_template
 app = Flask(__name__)
 
 @app.route('/')
-def hello_world():
-    return render_template('form.html', name="hello")
+def index():
+    return render_template('form.html')
+	
+@app.route('/result')
+def result():
+	fitResult=[]
+	
+	
+	return render_template('result.html',result=fitResult)
