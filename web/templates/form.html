@@ -1,8 +1,8 @@
 <html>
 <head>
     <title>Income Prediction</title>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="icon" href="img/logo.png">
+    <link rel="stylesheet" href="static/styles.css">
+    <link rel="icon" href="static/img/logo.png">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -23,16 +23,16 @@
         <p style="font-size:small; margin:0px;">Tubes II Intelegensi Buatan</p>
     </div>
 </div>
-<div class="form">
+<div class="form" ng-app="income" ng-controller="incomeController">
     <form method="POST" action="/result">
         <div class="container">
             <div class="row form-group">
                 <div class="col-sm-4">Age</div>
-                <input class="col-sm-8" type="text" name="age">
+                <input class="col-sm-8" type="text" name="age" ng-model="age">
             </div>
             <div class="row form-group">
                 <div class="col-sm-4">Workclass</div>
-                <select class="col-sm-8" name="workclass">
+                <select class="col-sm-8" name="workclass" ng-model="workclass">
                     <option value="?"></option>
                     <option value="Private">Private</option>
                     <option value="Self-emp-not-inc">Self-emp-not-inc</option>
@@ -46,11 +46,11 @@
             </div>
             <div class="row form-group">
                 <div class="col-sm-4">Fnlwgt</div>
-                <input class="col-sm-8" type="text" name="fnlwgt">
+                <input class="col-sm-8" type="text" name="fnlwgt" ng-model="fnlwgt">
             </div>
             <div class="row form-group">
                 <div class="col-sm-4">Education</div>
-                <select class="col-sm-8" name="education">
+                <select class="col-sm-8" name="education" ng-model="education">
                     <option value="?"></option>
                     <option value="Bachelors">Bachelors</option>
                     <option value="Some-college">Some-college</option>
@@ -71,11 +71,11 @@
             </div>
             <div class="row form-group">
                 <div class="col-sm-4">Education-num</div>
-                <input class="col-sm-8" type="text" name="education-num">
+                <input class="col-sm-8" type="text" name="education-num" ng-model="educationnum">
             </div>
             <div class="row form-group">
                 <div class="col-sm-4">Marital status</div>
-                <select class="col-sm-8" name="marital-status">
+                <select class="col-sm-8" name="marital-status" ng-model="maritalstatus">
                     <option value="?"></option>
                     <option value="Married-civ-spouse">Married-civ-spouse</option>
                     <option value="Divorced">Divorced</option>
@@ -88,7 +88,7 @@
             </div>
             <div class="row form-group">
                 <div class="col-sm-4">Occupation</div>
-                <select class="col-sm-8" name="occupation">
+                <select class="col-sm-8" name="occupation" ng-model="occupation">
                     <option value="?"></option>
                     <option value="Tech-support">Tech-support</option>
                     <option value="Craft-repair">Craft-repair</option>
@@ -108,7 +108,7 @@
             </div>
             <div class="row form-group">
                 <div class="col-sm-4">Relationship</div>
-                <select class="col-sm-8" name="relationship">
+                <select class="col-sm-8" name="relationship" ng-model="relationship">
                     <option value="?"></option>
                     <option value="Wife">Wife</option>
                     <option value="Own-child">Own-child</option>
@@ -120,7 +120,7 @@
             </div>
             <div class="row form-group">
                 <div class="col-sm-4">Race</div>
-                <select class="col-sm-8" name="race">
+                <select class="col-sm-8" name="race" ng-model="race">
                     <option value="?"></option>
                     <option value="White">White</option>
                     <option value="Asian-Pac-Islander">Asian-Pac-Islander</option>
@@ -131,7 +131,7 @@
             </div>
             <div class="row form-group">
                 <div class="col-sm-4">Sex</div>
-                <select name="sex" class="col-sm-8">
+                <select name="sex" class="col-sm-8" ng-model="sex">
                     <option value="?"></option>
                     <option value="Female">Female</option>
                     <option value="Male">Male</option>
@@ -139,18 +139,18 @@
             </div>
             <div class="row form-group">
                 <div class="col-sm-4">Capital Gain</div>
-                <input class="col-sm-8" type="text" name="capital-gain">
+                <input class="col-sm-8" type="text" name="capital-gain" ng-model="capitalgain">
             </div>
             <div class="row form-group">
                 <div class="col-sm-4">Capital Loss</div>
-                <input class="col-sm-8" type="text" name="capital-loss">
+                <input class="col-sm-8" type="text" name="capital-loss" ng-model="capitalloss">
             </div>
             <div class="row form-group">
                 <div class="col-sm-4">Hours per Week</div>
-                <input class="col-sm-8" type="text" name="hours-per-week"></div>
+                <input class="col-sm-8" type="text" name="hours-per-week" ng-model="hoursperweek"></div>
             <div class="row form-group">
                 <div class="col-sm-4">Native Country</div>
-                <select class="col-sm-8" name="native-country">
+                <select class="col-sm-8" name="native-country" ng-model="nativecountry">
                     <option value="?"></option>
                     <option value="United-States">United-States</option>
                     <option value="Cambodia">Cambodia</option>
@@ -196,11 +196,14 @@
             </div>
         </div>
         <div>
-            <input type="submit" value="Predict!"></input>
+            <input type="button" ng-click="fetchResult()" value="Predict!"></input>
         </div>
+		<div class="result">
+			{{result}}
+		</div>
     </form>
 </div>
-<div class="row AboutUs" style="display:flex;flex-flow: row wrap; font-family: 'Arial Unicode MS';">
+<div class="AboutUs">
     <div class="About1 col-lg-4">
         <p><b>Kelompok 49</b></p>
         <p>
@@ -231,6 +234,36 @@
         </p>
     </div>
 </div>
-
+<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+<script>
+	var app = angular.module("income",[]);
+	
+	app.controller('incomeController', function($scope, $http){
+		$scope.result = "";
+		$scope.fetchResult = function(){
+			var req = {}
+			req.age = $scope.age;
+			req.workclass = $scope.workclass;
+			req.fnlwgt = $scope.fnlwgt;
+			req.education = $scope.education;
+			req["education-num"] = $scope.educationnum;
+			req["marital-status"] = $scope.maritalstatus;
+			req.occupation = $scope.occupation;
+			req.relationship = $scope.relationship;
+			req.race = $scope.race;
+			req.sex = $scope.sex;
+			req["capital-gain"] = $scope.capitalgain;
+			req["capital-loss"] = $scope.capitalloss;
+			req["hours-per-week"] = $scope.hoursperweek;
+			req["native-country"] = $scope.nativecountry;
+			
+			console.log(req)
+			
+			$http.post('/result',req).then(function(response){
+				$scope.result = response;
+			});
+		}
+	});
+</script>
 </body>
 </html>

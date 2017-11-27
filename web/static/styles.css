@@ -77,11 +77,24 @@ input[type=submit]:hover {
 }
 
 .AboutUs{
-    display:flex;flex-flow: row wrap; font-family: Tahoma;
+    display:flex;
+	flex-flow: row wrap;
+	font-family: 'Arial Unicode MS';
 }
 .About1{
-    background-color: #F0F0F0; text-align:center;float:left; flex:1;
+    font-family: Tahoma;
+	background-color: #F0F0F0;
+	text-align:center;
 }
 .About2{
-    background-color: #373737;text-align:center;float:left; flex:1;color: #FFFFFF;
+    background-color: #373737;
+	text-align:center;
+	color: #FFFFFF;
+}
+
+.result {
+	margin-top: 1rem;
+	text-align:center;
+	font-size:2rem;
+	font-weight: bold;
 }
