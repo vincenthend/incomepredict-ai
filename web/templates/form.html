@@ -1,156 +1,236 @@
 <html>
 <head>
-	<title>Income Prediction</title>
+    <title>Income Prediction</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" href="img/logo.png">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js"
+            integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh"
+            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js"
+            integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ"
+            crossorigin="anonymous"></script>
+
 </head>
 <body>
-	<h1>Predict your Income!</h1>
-	<form method="POST" action="/result">
-		<div>Age : <input type="text" name="age"></div>
-		<div>Workclass :
-			<select name="workclass">
-				<option value="?"></option>
-				<option value="Private">Private</option>
-				<option value="Self-emp-not-inc">Self-emp-not-inc</option>
-				<option value="Self-emp-inc">Self-emp-inc</option>
-				<option value="Federal-gov">Federal-gov</option>
-				<option value="Local-gov">Local-gov</option>
-				<option value="State-gov">State-gov</option>
-				<option value="Without-pay">Without-pay</option>
-				<option value="Never-worked">Never-worked</option>
-			</select>
-		</div>
-		<div>fnlwgt : <input type="text" name="fnlwgt"></div>
-		<div>Education :
-			<select name="education">
-				<option value="?"></option>
-				<option value="Bachelors">Bachelors</option>
-				<option value="Some-college">Some-college</option>
-				<option value="11th">11th</option>
-				<option value="HS-grad">HS-grad</option>
-				<option value="Prof-school">Prof-school</option>
-				<option value="Assoc-acdm">Assoc-acdm</option>
-				<option value="Assoc-voc">Assoc-voc</option>
-				<option value="9th">9th</option>
-				<option value="7th-8th">7th-8th</option>
-				<option value="12th">12th</option>
-				<option value="Masters">Masters</option>
-				<option value="1st-4th">1st-4th</option>
-				<option value="Doctorate">Doctorate</option>
-				<option value="5th-6th">5th-6th</option>
-				<option value="Preschool">Preschool</option>
-			</select>
-		</div>
-		<div> Education-num : <input type="text" name="education-num"></div>
-		<div> Marital-status :
-			<select name="marital-status">
-				<option value="?"></option>
-				<option value="Married-civ-spouse">Married-civ-spouse</option>
-				<option value="Divorced">Divorced</option>
-				<option value="Never-married">Never-married</option>
-				<option value="Separated">Separated</option>
-				<option value="Widowed">Widowed</option>
-				<option value="Married-spouse-absent">Married-spouse-absent</option>
-				<option value="Married-AF-spouse">Marreid-AF-spouse</option>
-			</select>
-		</div>
-		<div> Occupation :
-			<select name="occupation">
-				<option value="?"></option>
-				<option value="Tech-support">Tech-support</option>
-				<option value="Craft-repair">Craft-repair</option>
-				<option value="Other-service">Other-service</option>
-				<option value="Sales">Sales</option>
-				<option value="Exec-managerial">Exec-managerial</option>
-				<option value="Prof-specialty">Prof-specialty</option>
-				<option value="Handlers-cleaners">Handlers-cleaners</option>
-				<option value="Machine-op-inspct">Machine-op-inspct</option>
-				<option value="Adm-clerical">Adm-clerical</option>
-				<option value="Farming-fishing">Farming-fishing</option>
-				<option value="Transport-moving">Transport-moving</option>
-				<option value="Priv-house-serv">Priv-house-serv</option>
-				<option value="Protective-serv">Protective-serv</option>
-				<option value="Armed-Forces">Armed-Forces</option>
-			</select>
-		</div>
-		<div> Relationship :
-			<select name="relationship">
-				<option value="?"></option>
-				<option value="Wife">Wife</option>
-				<option value="Own-child">Own-child</option>
-				<option value="Husband">Husband</option>
-				<option value="Not-in-family">Not-in-family</option>
-				<option value="Other-relative">Other-relative</option>
-				<option value="Unmarried">Unmarried</option>
-			</select>
-		</div>
-		<div> Race :
-			<select name="race">
-				<option value="?"></option>
-				<option value="White">White</option>
-				<option value="Asian-Pac-Islander">Asian-Pac-Islander</option>
-				<option value="Amer-Indian-Eskimo">Amer-Indian-Eskimo</option>
-				<option value="Other">Other</option>
-				<option value="Black">Black</option>
-			</select>
-		</div>
-		<div> Sex :
-			<select name="sex">
-				<option value="?"></option>
-				<option value="Female">Female</option>
-				<option value="Male">Male</option>
-			</select>
-		</div>
-		<div> Capital-gain : <input type="text" name="capital-gain"></div>
-		<div> Capital-loss : <input type="text" name="capital-loss"></div>
-		<div> Hours-per-week : <input type="text" name="hours-per-week"></div>
-		<div> Native-country :
-			<select name="native-country">
-				<option value="?"></option>
-				<option value="United-States">United-States</option>
-				<option value="Cambodia">Cambodia</option>
-				<option value="England">England</option>
-				<option value="Puerto-Rico">Puerto-Rico</option>
-				<option value="Canada">Canada</option>
-				<option value="Germany">Germany</option>
-				<option value="Outlying-US(Guam-USVI-etc)">Outlying-US(Guam-USVI-etc)</option>
-				<option value="India">India</option>
-				<option value="Japan">Japan</option>
-				<option value="Greece">Greece</option>
-				<option value="South">South</option>
-				<option value="China">China</option>
-				<option value="Cuba">Cuba</option>
-				<option value="Iran">Iran</option>
-				<option value="Honduras">Honduras</option>
-				<option value="Philippines">Philippines</option>
-				<option value="Italy">Italy</option>
-				<option value="Poland">Poland</option>
-				<option value="Jamaica">Jamaica</option>
-				<option value="Vietnam">Vietnam</option>
-				<option value="Mexico">Mexico</option>
-				<option value="Portugal">Portugal</option>
-				<option value="Ireland">Ireland</option>
-				<option value="France">France</option>
-				<option value="Dominican-Republic">Dominican-Republic</option>
-				<option value="Laos">Laos</option>
-				<option value="Ecuador">Ecuador</option>
-				<option value="Taiwan">Taiwan</option>
-				<option value="Haiti">Haiti</option>
-				<option value="Columbia">Columbia</option>
-				<option value="Hungary">Hungary</option>
-				<option value="Guatemala">Guatemala</option>
-				<option value="Nicaragua">Nicaragua</option>
-				<option value="Scotland">Scotland</option>
-				<option value="Yugoslavia">Yugoslavia</option>
-				<option value="El-Salvador">El-savador</option>
-				<option value="Trinadad&Tobago">Trinadad&Tobago</option>
-				<option value="Peru">Peru</option>
-				<option value="Hong">Hong</option>
-				<option value="Holand-Netherlands">Holand-Netherlands</option>
-			</select>
-		</div>
-		<div>
-			<input type="submit" value="Submit"></input>
-		</div>
-	</form>
+<div class="titlediv" id="LogoHeader">
+    <div class="titleholder">
+        <p style=" font-size:48px; margin-top:5px; margin-bottom:2px;">INCOME PREDICTOR</p>
+        <p style="font-size:small; margin:0px;">Tubes II Intelegensi Buatan</p>
+    </div>
+</div>
+<div class="form">
+    <form method="POST" action="/result">
+        <div class="container">
+            <div class="row form-group">
+                <div class="col-sm-4">Age</div>
+                <input class="col-sm-8" type="text" name="age">
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-4">Workclass</div>
+                <select class="col-sm-8" name="workclass">
+                    <option value="?"></option>
+                    <option value="Private">Private</option>
+                    <option value="Self-emp-not-inc">Self-emp-not-inc</option>
+                    <option value="Self-emp-inc">Self-emp-inc</option>
+                    <option value="Federal-gov">Federal-gov</option>
+                    <option value="Local-gov">Local-gov</option>
+                    <option value="State-gov">State-gov</option>
+                    <option value="Without-pay">Without-pay</option>
+                    <option value="Never-worked">Never-worked</option>
+                </select>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-4">Fnlwgt</div>
+                <input class="col-sm-8" type="text" name="fnlwgt">
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-4">Education</div>
+                <select class="col-sm-8" name="education">
+                    <option value="?"></option>
+                    <option value="Bachelors">Bachelors</option>
+                    <option value="Some-college">Some-college</option>
+                    <option value="11th">11th</option>
+                    <option value="HS-grad">HS-grad</option>
+                    <option value="Prof-school">Prof-school</option>
+                    <option value="Assoc-acdm">Assoc-acdm</option>
+                    <option value="Assoc-voc">Assoc-voc</option>
+                    <option value="9th">9th</option>
+                    <option value="7th-8th">7th-8th</option>
+                    <option value="12th">12th</option>
+                    <option value="Masters">Masters</option>
+                    <option value="1st-4th">1st-4th</option>
+                    <option value="Doctorate">Doctorate</option>
+                    <option value="5th-6th">5th-6th</option>
+                    <option value="Preschool">Preschool</option>
+                </select>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-4">Education-num</div>
+                <input class="col-sm-8" type="text" name="education-num">
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-4">Marital status</div>
+                <select class="col-sm-8" name="marital-status">
+                    <option value="?"></option>
+                    <option value="Married-civ-spouse">Married-civ-spouse</option>
+                    <option value="Divorced">Divorced</option>
+                    <option value="Never-married">Never-married</option>
+                    <option value="Separated">Separated</option>
+                    <option value="Widowed">Widowed</option>
+                    <option value="Married-spouse-absent">Married-spouse-absent</option>
+                    <option value="Married-AF-spouse">Marreid-AF-spouse</option>
+                </select>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-4">Occupation</div>
+                <select class="col-sm-8" name="occupation">
+                    <option value="?"></option>
+                    <option value="Tech-support">Tech-support</option>
+                    <option value="Craft-repair">Craft-repair</option>
+                    <option value="Other-service">Other-service</option>
+                    <option value="Sales">Sales</option>
+                    <option value="Exec-managerial">Exec-managerial</option>
+                    <option value="Prof-specialty">Prof-specialty</option>
+                    <option value="Handlers-cleaners">Handlers-cleaners</option>
+                    <option value="Machine-op-inspct">Machine-op-inspct</option>
+                    <option value="Adm-clerical">Adm-clerical</option>
+                    <option value="Farming-fishing">Farming-fishing</option>
+                    <option value="Transport-moving">Transport-moving</option>
+                    <option value="Priv-house-serv">Priv-house-serv</option>
+                    <option value="Protective-serv">Protective-serv</option>
+                    <option value="Armed-Forces">Armed-Forces</option>
+                </select>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-4">Relationship</div>
+                <select class="col-sm-8" name="relationship">
+                    <option value="?"></option>
+                    <option value="Wife">Wife</option>
+                    <option value="Own-child">Own-child</option>
+                    <option value="Husband">Husband</option>
+                    <option value="Not-in-family">Not-in-family</option>
+                    <option value="Other-relative">Other-relative</option>
+                    <option value="Unmarried">Unmarried</option>
+                </select>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-4">Race</div>
+                <select class="col-sm-8" name="race">
+                    <option value="?"></option>
+                    <option value="White">White</option>
+                    <option value="Asian-Pac-Islander">Asian-Pac-Islander</option>
+                    <option value="Amer-Indian-Eskimo">Amer-Indian-Eskimo</option>
+                    <option value="Other">Other</option>
+                    <option value="Black">Black</option>
+                </select>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-4">Sex</div>
+                <select name="sex" class="col-sm-8">
+                    <option value="?"></option>
+                    <option value="Female">Female</option>
+                    <option value="Male">Male</option>
+                </select>
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-4">Capital Gain</div>
+                <input class="col-sm-8" type="text" name="capital-gain">
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-4">Capital Loss</div>
+                <input class="col-sm-8" type="text" name="capital-loss">
+            </div>
+            <div class="row form-group">
+                <div class="col-sm-4">Hours per Week</div>
+                <input class="col-sm-8" type="text" name="hours-per-week"></div>
+            <div class="row form-group">
+                <div class="col-sm-4">Native Country</div>
+                <select class="col-sm-8" name="native-country">
+                    <option value="?"></option>
+                    <option value="United-States">United-States</option>
+                    <option value="Cambodia">Cambodia</option>
+                    <option value="England">England</option>
+                    <option value="Puerto-Rico">Puerto-Rico</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Germany">Germany</option>
+                    <option value="Outlying-US(Guam-USVI-etc)">Outlying-US(Guam-USVI-etc)</option>
+                    <option value="India">India</option>
+                    <option value="Japan">Japan</option>
+                    <option value="Greece">Greece</option>
+                    <option value="South">South</option>
+                    <option value="China">China</option>
+                    <option value="Cuba">Cuba</option>
+                    <option value="Iran">Iran</option>
+                    <option value="Honduras">Honduras</option>
+                    <option value="Philippines">Philippines</option>
+                    <option value="Italy">Italy</option>
+                    <option value="Poland">Poland</option>
+                    <option value="Jamaica">Jamaica</option>
+                    <option value="Vietnam">Vietnam</option>
+                    <option value="Mexico">Mexico</option>
+                    <option value="Portugal">Portugal</option>
+                    <option value="Ireland">Ireland</option>
+                    <option value="France">France</option>
+                    <option value="Dominican-Republic">Dominican-Republic</option>
+                    <option value="Laos">Laos</option>
+                    <option value="Ecuador">Ecuador</option>
+                    <option value="Taiwan">Taiwan</option>
+                    <option value="Haiti">Haiti</option>
+                    <option value="Columbia">Columbia</option>
+                    <option value="Hungary">Hungary</option>
+                    <option value="Guatemala">Guatemala</option>
+                    <option value="Nicaragua">Nicaragua</option>
+                    <option value="Scotland">Scotland</option>
+                    <option value="Yugoslavia">Yugoslavia</option>
+                    <option value="El-Salvador">El-savador</option>
+                    <option value="Trinadad&Tobago">Trinadad&Tobago</option>
+                    <option value="Peru">Peru</option>
+                    <option value="Hong">Hong</option>
+                    <option value="Holand-Netherlands">Holand-Netherlands</option>
+                </select>
+            </div>
+        </div>
+        <div>
+            <input type="submit" value="Predict!"></input>
+        </div>
+    </form>
+</div>
+<div class="row AboutUs" style="display:flex;flex-flow: row wrap; font-family: 'Arial Unicode MS';">
+    <div class="About1 col-lg-4">
+        <p><b>Kelompok 49</b></p>
+        <p>
+            Finiko Kasula Novenda - 13515029<br/>
+            M. Dicky Andika Putra - 13515044<br/>
+            Vincent Hendryanto Halim - 13515089<br/>
+            Mikhael Artur Darmakesuma - 13515099<br/>
+            William - 13515144<br/>
+        </p>
+    </div>
+    <div class="About2 col-lg-4">
+        <p><b>Web Prediksi Income</b></p>
+        <p>
+            Tugas Besar II <br/>
+            IF3170 Intelegensi Buatan<br/>
+            Program Studi Teknik Informatika<br/>
+            Sekolah Teknik Elektro dan Informatika <br/>
+            Institut Teknologi Bandung
+        </p>
+    </div>
+    <div class="About1 col-lg-4">
+        <p><b>Terima Kasih Kepada</b></p>
+        <p>
+            Bu Ayu Purwarianti<br/>
+            Bu Masayu Leylia Khodra<br/>
+            Bu Nur Ulfa Maulidevi<br/>
+            Segenap asisten matkul AI
+        </p>
+    </div>
+</div>
+
 </body>
 </html>
