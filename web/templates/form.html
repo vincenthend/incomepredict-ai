@@ -76,7 +76,7 @@
             <div class="row form-group">
                 <div class="col-sm-4">Marital status</div>
                 <select class="col-sm-8" name="marital-status" ng-model="maritalstatus">
-                    <option value="?"></option>
+                    <option value="?">?</option>
                     <option value="Married-civ-spouse">Married-civ-spouse</option>
                     <option value="Divorced">Divorced</option>
                     <option value="Never-married">Never-married</option>
@@ -89,7 +89,7 @@
             <div class="row form-group">
                 <div class="col-sm-4">Occupation</div>
                 <select class="col-sm-8" name="occupation" ng-model="occupation">
-                    <option value="?"></option>
+                    <option value="?">?</option>
                     <option value="Tech-support">Tech-support</option>
                     <option value="Craft-repair">Craft-repair</option>
                     <option value="Other-service">Other-service</option>
@@ -109,7 +109,7 @@
             <div class="row form-group">
                 <div class="col-sm-4">Relationship</div>
                 <select class="col-sm-8" name="relationship" ng-model="relationship">
-                    <option value="?"></option>
+                    <option value="?">?</option>
                     <option value="Wife">Wife</option>
                     <option value="Own-child">Own-child</option>
                     <option value="Husband">Husband</option>
@@ -121,7 +121,7 @@
             <div class="row form-group">
                 <div class="col-sm-4">Race</div>
                 <select class="col-sm-8" name="race" ng-model="race">
-                    <option value="?"></option>
+                    <option value="?">?</option>
                     <option value="White">White</option>
                     <option value="Asian-Pac-Islander">Asian-Pac-Islander</option>
                     <option value="Amer-Indian-Eskimo">Amer-Indian-Eskimo</option>
@@ -132,7 +132,7 @@
             <div class="row form-group">
                 <div class="col-sm-4">Sex</div>
                 <select name="sex" class="col-sm-8" ng-model="sex">
-                    <option value="?"></option>
+                    <option value="?">?</option>
                     <option value="Female">Female</option>
                     <option value="Male">Male</option>
                 </select>
@@ -151,7 +151,7 @@
             <div class="row form-group">
                 <div class="col-sm-4">Native Country</div>
                 <select class="col-sm-8" name="native-country" ng-model="nativecountry">
-                    <option value="?"></option>
+                    <option value="?">?</option>
                     <option value="United-States">United-States</option>
                     <option value="Cambodia">Cambodia</option>
                     <option value="England">England</option>
@@ -199,7 +199,7 @@
             <input type="button" ng-click="fetchResult()" value="Predict!"></input>
         </div>
 		<div class="result">
-			{{result}}
+			[[result]]
 		</div>
     </form>
 </div>
@@ -238,8 +238,22 @@
 <script>
 	var app = angular.module("income",[]);
 	
+	app.config(function ($interpolateProvider) {
+		$interpolateProvider.startSymbol('[[');
+		$interpolateProvider.endSymbol(']]');
+	});
+	
 	app.controller('incomeController', function($scope, $http){
 		$scope.result = "";
+		$scope.workclass = "?";
+		$scope.education = "?";
+		$scope.maritalstatus = "?";
+		$scope.occupation = "?";
+		$scope.relationship = "?";
+		$scope.race = "?";
+		$scope.sex = "?";
+		$scope.nativecountry = "?";
+		
 		$scope.fetchResult = function(){
 			var req = {}
 			req.age = $scope.age;
@@ -256,11 +270,11 @@
 			req["capital-loss"] = $scope.capitalloss;
 			req["hours-per-week"] = $scope.hoursperweek;
 			req["native-country"] = $scope.nativecountry;
+		
 			
-			console.log(req)
-			
-			$http.post('/result',req).then(function(response){
-				$scope.result = response;
+			$http.post('/result',req, {"content-type":"application/json"}).then(function(response){
+				$scope.result = response.data.result;
+				console.log(response.data.result);
 			});
 		}
 	});

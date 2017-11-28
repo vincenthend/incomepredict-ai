@@ -43,23 +43,23 @@ def result():
        'relationship_Unmarried', 'relationship_Wife', 'sex_Female',
        'sex_Male']
 	
-	
+	request_json = request.get_json()
 	
 	request_data = {
-		"age" : int(request.form['age']),
-		"workclass" : request.form['workclass'],
-		"fnlwgt" : int(request.form['fnlwgt']),
-		"education" : request.form['education'],	
-		"education-num" : int(request.form['education-num']),
-		"marital-status" : request.form['marital-status'],
-		"occupation" : request.form['occupation'],
-		"relationship" : request.form['relationship'],
-		"race" : request.form['race'],
-		"sex" : request.form['sex'],
-		"capital-gain" : int(request.form['capital-gain']),
-		"capital-loss" : int(request.form['capital-loss']),
-		"hours-per-week" : int(request.form['hours-per-week']),
-		"native-country" : request.form['native-country']
+		"age" : int(request_json['age']),
+		"workclass" : request_json['workclass'],
+		"fnlwgt" : int(request_json['fnlwgt']),
+		"education" : request_json['education'],	
+		"education-num" : int(request_json['education-num']),
+		"marital-status" : request_json['marital-status'],
+		"occupation" : request_json['occupation'],
+		"relationship" : request_json['relationship'],
+		"race" : request_json['race'],
+		"sex" : request_json['sex'],
+		"capital-gain" : int(request_json['capital-gain']),
+		"capital-loss" : int(request_json['capital-loss']),
+		"hours-per-week" : int(request_json['hours-per-week']),
+		"native-country" : request_json['native-country']
 	}
 	
 	dataFit = DataFrame(data=request_data, index=[0])
@@ -74,6 +74,9 @@ def result():
 	tree_model = pickle.load(open("out.pkl","rb+"))
 	fitResult = tree_model.predict(dataFrame)
 	
+	json_result = {
+		"result" : fitResult[0]
+	}
+	
 	#return dataFrame.to_json(orient='index')
-	return request
-	#return jsonify(fitResult[0])
+	return jsonify(json_result)
